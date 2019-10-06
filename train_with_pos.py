@@ -13,7 +13,7 @@ warnings.filterwarnings("ignore")
 
 # 파일 불러오기
 DATA_ROOT = 'dataset'
-TRAIN_INPUT = 'train_input.npy'
+TRAIN_INPUT = 'train_input_with_pos.npy'
 TRAIN_LABELS = 'train_labels.npy'
 
 CONFIG_ROOT = 'CONFIG'
@@ -36,7 +36,7 @@ with open(WORDS_PATH) as words_path:
     words_config = json.load(words_path)
 
 max_sentence_length = pos_tag_config['max_sentence_length']
-vocab_size = words_config['vocab_size']
+vocab_size = words_config['vocab_size_with_pos']
 ner_to_index_dic = words_config['ner_to_index_dic']
 n_labels = len(ner_to_index_dic)
 
@@ -75,13 +75,13 @@ history = model.fit(train_input, train_labels_one_hot, batch_size=batch_size,
 
 # 모델 저장하기
 model_json = model.to_json()
-with open("./model/model.json", 'w') as json_file:
+with open("./model/model_with_pos.json", 'w') as json_file:
     json_file.write(model_json)
 
-model.save_weights("./model/model.h5")
+model.save_weights("./model/model_with_pos.h5")
 
 json_dumps = json.dumps(history.history)
-with open('./model/model_history.json', 'w') as f:
+with open('./model/model_history_with_pos.json', 'w') as f:
     f.write(json_dumps)
 
 print("keras model is saved")
