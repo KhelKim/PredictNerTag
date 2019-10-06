@@ -1,0 +1,10 @@
+Without pos tag
+CONFIG: {'max_sentence_length': 70, 'min_word_count': 5, 'embedding_size': 32, 'n_hidden1': 50, 'n_hidden2': 32, 'batch_size': 128, 'epochs': 5}
+accuracy: 0.9624664879356568
+f1_score: 0.7783641160949868
+
+With pos tag
+CONFIG: {'max_sentence_length': 70, 'min_word_count': 5, 'embedding_size': 32, 'n_hidden1': 50, 'n_hidden2': 32, 'batch_size': 128, 'epochs': 5}
+accuracy: 0.9705093833780161
+f1_score: 0.8124999999999999
+
