@@ -63,4 +63,4 @@ def save_csv_file(save_root, file_name, text):
         writer.writerow(['sentence_index', 'word', 'pos', 'chunk', 'ner'])
         for i, sentence in enumerate(text):
             for content in sentence:
-                writer.writerow(content)
+                writer.writerow([i] + content)
