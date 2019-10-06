@@ -7,6 +7,7 @@ from keras.optimizers import Adam
 from keras_contrib.layers import CRF
 from module.test import get_arg_list
 from nltk.tokenize import word_tokenize
+from nltk.tag import pos_tag
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -28,12 +29,13 @@ with open(WORDS_PATH) as words_path:
     words_config = json.load(words_path)
 
 max_sentence_length = config_dic['max_sentence_length']
-word_to_index_dic = words_config['word_to_index_dic']
-vocab_size = words_config['vocab_size']
+index_to_word_dic = words_config['index_to_word_dic_with_pos']
+vocab_size = words_config['vocab_size_with_pos']
 ner_to_index_dic = words_config['ner_to_index_dic']
 B_PER_index = ner_to_index_dic['B-PER']
 I_PER_index = ner_to_index_dic['I-PER']
 n_labels = len(ner_to_index_dic)
+word_to_index_dic = {tuple(value): int(key) for key, value in index_to_word_dic.items()}
 
 
 def padding(x):
@@ -43,15 +45,18 @@ def padding(x):
         return x + [0] * (max_sentence_length - len(x))
 
 
-input_sentence_list = word_tokenize(input_sentence.lower())
+input_sentence_list = pos_tag(word_tokenize(input_sentence))
+input_sentence_list = list(map(lambda x: (x[0].lower(), x[1]), input_sentence_list))
+input_sentence_list = [(word, pos[:2])for word, pos in input_sentence_list]
+
 input_sentence_with_index = get_index_list_of_sentences(
-    [[(word, "O") for word in input_sentence_list]], word_to_index_dic, pos_tag=False)
+    [[(word, "O") for word in input_sentence_list]], word_to_index_dic)
 final_input = np.array([padding(x) for x in input_sentence_with_index])
 
 # 모델 불러오기
 MODEL_ROOT = 'model'
-MODEL_JSON = 'model.json'
-MODEL_H5 = 'model.h5'
+MODEL_JSON = 'model_with_pos.json'
+MODEL_H5 = 'model_with_pos.h5'
 
 
 MODEL_JSON_PATH = os.path.join(MODEL_ROOT, MODEL_JSON)
