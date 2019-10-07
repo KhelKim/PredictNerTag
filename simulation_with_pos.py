@@ -47,7 +47,7 @@ def padding(x):
 
 input_sentence_list = pos_tag(word_tokenize(input_sentence))
 input_sentence_list = list(map(lambda x: (x[0].lower(), x[1]), input_sentence_list))
-input_sentence_list = [(word, pos[:2])for word, pos in input_sentence_list]
+input_sentence_list = [(word, pos)for word, pos in input_sentence_list]
 
 input_sentence_with_index = get_index_list_of_sentences(
     [[(word, "O") for word in input_sentence_list]], word_to_index_dic)

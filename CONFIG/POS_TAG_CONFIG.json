@@ -1,1 +1,1 @@
-{"max_sentence_length": 70, "min_word_count": 5, "embedding_size": 32, "n_hidden1": 50, "n_hidden2": 32, "batch_size": 128, "epochs": 5}
+{"max_sentence_length": 70, "min_word_count": 5, "embedding_size": 64, "n_hidden1": 50, "n_hidden2": 32, "batch_size": 128, "epochs": 10}

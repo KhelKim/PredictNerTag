@@ -5,7 +5,7 @@ def get_text_list(data, index_name, pos_tag=True):
         for content in cur_sentence[1].values:
             sentence_id, word, pos, chunk, ner = content
             if pos_tag:
-                sentence.append([(word, pos[:2]), ner])
+                sentence.append([(word, pos), ner])
             else:
                 sentence.append([word, ner])
         text.append(sentence)
@@ -58,7 +58,10 @@ def get_index_list_of_sentences(text, word_to_index_dic, pos_tag=True):
                 word_index.append(word_to_index_dic[word])
             else:
                 if pos_tag:
-                    word_index.append(word_to_index_dic[("OOV", word[1])])
+                    if ("OOV", word[1]) in word_to_index_dic.keys():
+                        word_index.append(word_to_index_dic[("OOV", word[1])])
+                    else:
+                        word_index.append(word_to_index_dic[("OOV", "NN")])
                 else:
                     word_index.append(word_to_index_dic["OOV"])
         sentences_with_index.append(word_index)

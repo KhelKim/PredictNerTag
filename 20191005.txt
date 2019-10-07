@@ -1,9 +1,0 @@
-TODO
-BLSTM with pos 만들기
-
-1. 함수 description 쓰기
-2. 모듈 description 쓰기
-3. 발표자료 만들기
-	1. 작업 순서
-	2. BLSTM의 동작 방식과 써야하는 이유
-	3. 결과보고
