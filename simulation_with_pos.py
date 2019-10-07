@@ -46,7 +46,7 @@ def padding(x):
 
 
 input_sentence_list = pos_tag(word_tokenize(input_sentence))
-input_sentence_list = list(map(lambda x: (x[0].lower(), x[1]), input_sentence_list))
+input_sentence_list = list(map(lambda x: (x[0], x[1]), input_sentence_list))
 input_sentence_list = [(word, pos)for word, pos in input_sentence_list]
 
 input_sentence_with_index = get_index_list_of_sentences(
@@ -89,11 +89,12 @@ if result == 'Yes':
     print()
     for word, ner_index in zip(input_sentence_list, input_predict_word_index):
         if ner_index == B_PER_index or ner_index == I_PER_index:
-            print(word, '<PER>')
+            print(word[0], '<PER>')
         else:
-            print(word)
+            print(word[0])
 print("-" * division_length)
 print()
 print()
 
 print(input_predict_word_index)
+print(ner_to_index_dic)

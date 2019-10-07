@@ -36,7 +36,7 @@ max_sentence_length = config_dic['max_sentence_length']
 min_word_count = config_dic["min_word_count"]
 
 # 1. 소문자화
-data['word'] = data['word'].str.lower()
+# data['word'] = data['word'].str.lower()
 
 # 2. df를 리스트 형태로 변환
 text = get_text_list(data, 'sentence_index', pos_tag=False)
@@ -71,7 +71,7 @@ X_input_with_pos = [padding(index) for index in sentences_with_index_with_pos]
 y_input = [padding(index) for index in ner_with_index]
 
 # 8. 모델 용 test input data 만들기
-test['word'] = test['word'].str.lower()
+# test['word'] = test['word'].str.lower()
 
 test_text = get_text_list(test, 'sentence_index', pos_tag=False)
 test_text_with_pos = get_text_list(test, 'sentence_index')

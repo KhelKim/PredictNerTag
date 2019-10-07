@@ -74,26 +74,89 @@ BLSTM/
 
 ## Preprocessing
 
-전처리 과정에서는 주어진 데이터들을 소문자화하고, 각 문장들을 숫자로 표현하며 70의 길이가 되도록 패딩한다.
+전처리 과정에서는 주어진 데이터들을 소문자화하고, 각 문장들의 단어를 숫자로 표현하며 문장의 총 길이가 70 이하가 되도록 패딩한다.
 
-참고 자료에 따르면 pos tag를 함께 학습한다면 좀 더 나은 결과를 얻을 수 있다고 한다. 이를 추가적으로 실험하기 위해 pos tag가 포함된 input을 추가로 만든다.
-
-pos tag를 함께 학습하기 위해서 다음과 같은 규칙을 적용했다.
-
-1. 모르는 단어가 
+참고 자료에 따르면 pos tag를 함께 학습한다면 좀 더 나은 결과를 얻을 수 있다고 한다. 이를 실험하기 위해 pos tag가 포함된 input을 추가로 만든다.
 
 ## DeepLearning
 
-### BLSTM
+### BLSTM 모델
+
+- RNN은 뒤로 갈수록 초기 정보가 손실되는 단점이 있다. 이를 보안할 수 있는 모델이 LSTM 모델이다. LSTM은 은닉층의 메모리 셀에 입력 게이트, 망각 게이트, 출력 게이트를 추가하여 불필요한 기억을 지우고, 기억해야할 기억을 유지한다. 따라서 긴 시퀀스의 입력을 처리하는데 탁월한 성능을 보인다.
+  - 입력 게이트
+  - 삭제 게이트
+  - 셀 상태(장기 상태)
+  - 출력 게이트와 은닉 상태
+- Bidirectional Recurrent Neural Networks는 과거의 상태뿐만 아니라, 미래의 상태까지 고려하는 확장된 RNN 형태이다.
+  - 'Flirty' Princess Diana had Sly Stallone and Richard Gere fighting over her at Elton John's dinner party
+  - sly를 해석할 때 뒤를 참조한다면 사람 이름으로 읽을 가능성이 높다.
 
 ### Train
 
+사용한 하이퍼파라미터는 다음과 같다.
+
+```
+'max_sentence_length': 70, 
+'min_word_count': 5, 
+'embedding_size': 64, 
+'n_hidden1': 50, 
+'n_hidden2': 32, 
+'batch_size': 128, 
+'epochs': 10
+```
+
+프레임 워크는 keras를 사용했다.
+
 ### Test
+
+```
+Without pos tag
+CONFIG: {'max_sentence_length': 70, 'min_word_count': 5, 'embedding_size': 32, 'n_hidden1': 50, 'n_hidden2': 32, 'batch_size': 128, 'epochs': 5}
+accuracy: 0.9624664879356568
+f1_score: 0.7783641160949868
+
+With pos tag
+CONFIG: {'max_sentence_length': 70, 'min_word_count': 5, 'embedding_size': 32, 'n_hidden1': 50, 'n_hidden2': 32, 'batch_size': 128, 'epochs': 5}
+accuracy: 0.9705093833780161
+f1_score: 0.8124999999999999
+
+Without pos tag
+CONFIG: {'max_sentence_length': 70, 'min_word_count': 5, 'embedding_size': 64, 'n_hidden1': 50, 'n_hidden2': 32, 'batch_size': 128, 'epochs': 10}
+accuracy: 0.9892761394101877
+f1_score: 0.8623087621696801
+
+With pos tag
+CONFIG: {'max_sentence_length': 70, 'min_word_count': 5, 'embedding_size': 64, 'n_hidden1': 50, 'n_hidden2': 32, 'batch_size': 128, 'epochs': 10}
+accuracy: 0.9865951742627346
+f1_score: 0.8927613941018767
+
+Without pos tag
+CONFIG: {'max_sentence_length': 70, 'min_word_count': 5, 'embedding_size': 64, 'n_hidden1': 50, 'n_hidden2': 32, 'batch_size': 128, 'epochs': 10}
+accuracy: 0.9892761394101877
+f1_score: 0.8623087621696801
+
+With pos tag
+CONFIG: {'max_sentence_length': 70, 'min_word_count': 5, 'embedding_size': 64, 'n_hidden1': 50, 'n_hidden2': 32, 'batch_size': 128, 'epochs': 10}
+accuracy: 0.9892761394101877
+f1_score: 0.8856382978723403
+
+With pos tag and without lowering
+CONFIG: {'max_sentence_length': 70, 'min_word_count': 5, 'embedding_size': 64, 'n_hidden1': 50, 'n_hidden2': 32, 'batch_size': 128, 'epochs': 10}
+accuracy: 0.9892761394101877
+f1_score: 0.872870249017038
+```
 
 ### Simulation
 
+simulation.py 파일을 실행하고 input sentence를 넣게 되면 input sentence에 사람이름이 있는지 판단하고, 있다면 어느 위치에 있는지 보여준다.
+
 ## 실험
+
+- 객체 인식을 해야한다면 대문자가 중요한 역활을 할 것이라 생각되므로 소문자 변환 없이 전처리후 돌려본다.
 
 ## 개선 방향
 
-## 결과
+- 파일을 분리하면서, 훈련시키는 것과 예측하고 시뮬레이션 하는 것이 편해졌지만, 워크 프레임 자체를 수정할 때는 굉장히 불편했다.
+
+
+

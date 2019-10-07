@@ -11,7 +11,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 # 파일 불러오기
-DATAROOT = 'dataset'
+DATA_ROOT = 'dataset'
 TEST_INPUT = 'test_input_with_pos.npy'
 TEST_LABELS = 'test_labels.npy'
 
@@ -25,8 +25,8 @@ MODEL_ROOT = 'model'
 MODEL_JSON = 'model_with_pos.json'
 MODEL_H5 = 'model_with_pos.h5'
 
-TEST_INPUT_PATH = os.path.join(DATAROOT, TEST_INPUT)
-TEST_LABELS_PATH = os.path.join(DATAROOT, TEST_LABELS)
+TEST_INPUT_PATH = os.path.join(DATA_ROOT, TEST_INPUT)
+TEST_LABELS_PATH = os.path.join(DATA_ROOT, TEST_LABELS)
 
 with open(POS_TAG_PATH) as pos_tag_path:
     pos_tag_config = json.load(pos_tag_path)
@@ -94,6 +94,6 @@ print()
 print()
 
 with open("result/result.txt", 'a') as f:
-    f.write(f'With pos tag\n')
+    f.write('With pos tag\n')
     f.write(f'CONFIG: {pos_tag_config}\n')
     f.write(f"accuracy: {accuracy}\nf1_score: {f1_score}\n\n")
