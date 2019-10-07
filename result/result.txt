@@ -18,15 +18,10 @@ CONFIG: {'max_sentence_length': 70, 'min_word_count': 5, 'embedding_size': 64, '
 accuracy: 0.9865951742627346
 f1_score: 0.8927613941018767
 
-Without pos tag
+Without pos tag and without lowering
 CONFIG: {'max_sentence_length': 70, 'min_word_count': 5, 'embedding_size': 64, 'n_hidden1': 50, 'n_hidden2': 32, 'batch_size': 128, 'epochs': 10}
-accuracy: 0.9892761394101877
-f1_score: 0.8623087621696801
-
-With pos tag
-CONFIG: {'max_sentence_length': 70, 'min_word_count': 5, 'embedding_size': 64, 'n_hidden1': 50, 'n_hidden2': 32, 'batch_size': 128, 'epochs': 10}
-accuracy: 0.9892761394101877
-f1_score: 0.8856382978723403
+accuracy: 0.9785522788203753
+f1_score: 0.8515950069348127
 
 With pos tag and without lowering
 CONFIG: {'max_sentence_length': 70, 'min_word_count': 5, 'embedding_size': 64, 'n_hidden1': 50, 'n_hidden2': 32, 'batch_size': 128, 'epochs': 10}

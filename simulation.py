@@ -43,7 +43,7 @@ def padding(x):
         return x + [0] * (max_sentence_length - len(x))
 
 
-input_sentence_list = word_tokenize(input_sentence.lower())
+input_sentence_list = word_tokenize(input_sentence)  # input_sentence.lower()
 input_sentence_with_index = get_index_list_of_sentences(
     [[(word, "O") for word in input_sentence_list]], word_to_index_dic, pos_tag=False)
 final_input = np.array([padding(x) for x in input_sentence_with_index])
